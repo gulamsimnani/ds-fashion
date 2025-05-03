@@ -1,0 +1,12 @@
+<swiper [config]="swiperConfig" class="category-slider">
+  <ng-template swiperSlide *ngFor="let category of categories">
+    <div class="category-card">
+      <div class="category-image">
+        <img [src]="category.image" [alt]="category.title" class="img-fluid" />
+      </div>
+      <h3 class="category-title">{{ category.title }}</h3>
+      <p class="category-count">{{ category.count }} Products</p>
+      <a [routerLink]="['/category', category.slug]" class="stretched-link"></a>
+    </div>
+  </ng-template>
+</swiper>

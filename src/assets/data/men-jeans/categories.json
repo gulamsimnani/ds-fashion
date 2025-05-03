@@ -1,0 +1,21 @@
+[
+    {
+      "title": "Slim Fit Jeans",
+      "count": 12,
+      "image": "assets/img/product/slim-fit.jpg",
+      "slug": "slim-fit-jeans"
+    },
+    {
+      "title": "Regular Fit Jeans",
+      "count": 8,
+      "image": "assets/img/product/regular-fit.jpg",
+      "slug": "regular-fit-jeans"
+    },
+    {
+      "title": "Skinny Fit Jeans",
+      "count": 5,
+      "image": "assets/img/product/skinny-fit.jpg",
+      "slug": "skinny-fit-jeans"
+    }
+  ]
+  

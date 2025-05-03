@@ -1,0 +1,19 @@
+{
+    "jeans": [
+      {
+        "id": 1,
+        "name": "Slim Fit Jeans",
+        "category": "Slim",
+        "price": 39.99,
+        "image": "assets/images/slim-jeans.jpg"
+      },
+      {
+        "id": 2,
+        "name": "Skinny Fit Jeans",
+        "category": "Skinny",
+        "price": 49.99,
+        "image": "assets/images/skinny-jeans.jpg"
+      }
+    ]
+  }
+  
