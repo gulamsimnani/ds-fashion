@@ -1,61 +1,102 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { SwiperModule } from 'swiper/angular';
-
-import Swiper from 'swiper';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @Component({
   selector: 'app-category-slider',
   standalone: true,
-  imports: [CommonModule, SwiperModule],
+  imports: [CommonModule, SlickCarouselModule],
   templateUrl: './category-slider.component.html',
   styleUrls: ['./category-slider.component.scss'],
 })
-export class CategorySliderComponent implements OnInit {
-  categories: any[] = [];
-  swiperConfig: SwiperOptions = {
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
+export class CategorySliderComponent {
+  categories = [
+    {
+      image: 'assets/img/product/product-1.webp',
+      title: 'Vestibulum ante',
+      count: 4,
+      link: 'category.html',
     },
-    grabCursor: true,
-    speed: 600,
-    slidesPerView: 'auto',
-    spaceBetween: 20,
-    navigation: true,
-    breakpoints: {
-      320: {
-        slidesPerView: 2,
-        spaceBetween: 15,
-      },
-      576: {
-        slidesPerView: 3,
-        spaceBetween: 15,
-      },
-      768: {
-        slidesPerView: 4,
-        spaceBetween: 20,
-      },
-      992: {
-        slidesPerView: 5,
-        spaceBetween: 20,
-      },
-      1200: {
-        slidesPerView: 6,
-        spaceBetween: 20,
-      },
+    {
+      image: 'assets/img/product/product-6.webp',
+      title: 'Maecenas nec',
+      count: 8,
+      link: 'category.html',
     },
+    {
+      image: 'assets/img/product/product-3.webp',
+      title: 'Donec sodales',
+      count: 6,
+      link: 'category.html',
+    },
+    {
+      image: 'assets/img/product/product-4.webp',
+      title: 'Curabitur',
+      count: 10,
+      link: 'category.html',
+    },
+    {
+      image: 'assets/img/product/product-4.webp',
+      title: 'Curabitur',
+      count: 10,
+      link: 'category.html',
+    },
+    {
+      image: 'assets/img/product/product-1.webp',
+      title: 'Vestibulum ante',
+      count: 4,
+      link: 'category.html',
+    },
+    {
+      image: 'assets/img/product/product-6.webp',
+      title: 'Maecenas nec',
+      count: 8,
+      link: 'category.html',
+    },
+    {
+      image: 'assets/img/product/product-3.webp',
+      title: 'Donec sodales',
+      count: 6,
+      link: 'category.html',
+    },
+    {
+      image: 'assets/img/product/product-4.webp',
+      title: 'Curabitur',
+      count: 10,
+      link: 'category.html',
+    },
+    {
+      image: 'assets/img/product/product-4.webp',
+      title: 'Curabitur',
+      count: 10,
+      link: 'category.html',
+    }
+  ];
+
+  slideConfig = {
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    dots: true,
+    arrows: true,
+    prevArrow:
+      '<button type="button" class="slick-prev btn btn-outline-secondary me-2"><i class="bi bi-chevron-left"></i></button>',
+    nextArrow:
+      '<button type="button" class="slick-next btn btn-outline-secondary ms-2"><i class="bi bi-chevron-right"></i></button>',
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
-
-  constructor(private http: HttpClient) {}
-
-  ngOnInit(): void {
-    this.http
-      .get<any[]>('assets/data/jeans-categories.json')
-      .subscribe((data) => {
-        this.categories = data;
-      });
-  }
 }

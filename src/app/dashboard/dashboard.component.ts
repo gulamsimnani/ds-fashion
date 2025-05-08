@@ -1,11 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component } from '@angular/core';
+import { CategorySliderComponent } from '../category-slider/category-slider.component';
+import { ProductListComponent } from '../product-list/product-list.component';
 declare var AOS: any;
 declare var GLightbox: any;
 declare var Drift: any;
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, CategorySliderComponent, ProductListComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

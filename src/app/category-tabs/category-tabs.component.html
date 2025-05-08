@@ -1,0 +1,12 @@
+<div data-aos="fade-up" class="product-filters isotope-filters mb-5 d-flex justify-content-center aos-init aos-animate">
+<ul class="d-flex flex-wrap gap-2 list-unstyled">
+    <ng-container *ngFor="let category of categories">
+        <li class="nav-item"  class="nav-link"
+        [class.active]="selectedCategory === category"
+        (click)="setCategory(category)">
+              {{ category | titlecase }}
+          </li>
+    </ng-container>
+  </ul>
+  </div>
+  

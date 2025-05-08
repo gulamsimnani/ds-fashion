@@ -1862,7 +1862,10 @@ section,
   background-color: var(--background-color);
   padding: 60px 0;
   scroll-margin-top: 90px;
-  overflow: clip;
+  overflow: initial;
+}
+.slick-prev:before, .slick-next:before{
+  color: #333;
 }
 
 @media (max-width: 1199px) {
@@ -2683,6 +2686,10 @@ section,
 }
 
 .product-list .product-filters ul li.filter-active {
+  color: var(--contrast-color);
+  background-color: var(--accent-color);
+}
+.product-list .product-filters ul li.nav-link.active {
   color: var(--contrast-color);
   background-color: var(--accent-color);
 }

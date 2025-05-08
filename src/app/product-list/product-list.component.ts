@@ -1,28 +1,157 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { CartService } from '../services/cart.service';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Product } from '../models/product.model';
+import { ProductCardComponent } from '../product-card/product-card.component';
+import { CategoryTabsComponent } from '../category-tabs/category-tabs.component';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
+  imports: [CommonModule, ProductCardComponent, CategoryTabsComponent],
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss'],
-  imports: [CommonModule]
 })
-export class ProductListComponent implements OnInit {
-  
-  products: any = [];
+export class ProductListComponent {
+  products: Product[] = [
+    {
+      id: '1',
+      title: 'Elegant Shirt',
+      image: 'assets/img/product/product-11.webp',
+      hoverImage: 'assets/img/product/product-11-variant.webp',
+      price: 89.99,
+      oldPrice: 129.99,
+      rating: 4.5,
+      reviews: 24,
+      badge: 'Sale',
+      category: 'clothing',
+    },
+    {
+      id: '2',
+      title: 'Smartwatch',
+      image: 'assets/img/product/product-10.webp',
+      hoverImage: 'assets/img/product/product-10.webp',
+      price: 199.99,
+      rating: 4,
+      reviews: 14,
+      badge: 'New',
+      category: 'electronics',
+    },
+    {
+      id: '3',
+      title: 'Kids Bag',
+      image: 'assets/img/product/product-9.webp',
+      hoverImage: 'assets/img/product/product-9-variant.webp',
+      price: 59.99,
+      rating: 4.8,
+      reviews: 18,
+      category: 'accessories',
+    },
+    {
+      id: '4',
+      title: 'Elegant Shirt',
+      image: 'assets/img/product/product-11.webp',
+      hoverImage: 'assets/img/product/product-11-variant.webp',
+      price: 89.99,
+      oldPrice: 129.99,
+      rating: 4.5,
+      reviews: 24,
+      badge: 'Sale',
+      category: 'clothing',
+    },
+    {
+      id: '5',
+      title: 'Smartwatch',
+      image: 'assets/img/product/product-10.webp',
+      hoverImage: 'assets/img/product/product-10.webp',
+      price: 199.99,
+      rating: 4,
+      reviews: 14,
+      category: 'electronics',
+    },
+    {
+      id: '6',
+      title: 'Kids Bag',
+      image: 'assets/img/product/product-9.webp',
+      hoverImage: 'assets/img/product/product-9-variant.webp',
+      price: 59.99,
+      rating: 4.8,
+      reviews: 18,
+      category: 'accessories',
+    },
+    {
+      id: '7',
+      title: 'Elegant Shirt',
+      image: 'assets/img/product/product-11.webp',
+      hoverImage: 'assets/img/product/product-11-variant.webp',
+      price: 89.99,
+      oldPrice: 129.99,
+      rating: 4.5,
+      reviews: 24,
+      badge: 'Sale',
+      category: 'clothing',
+    },
+    {
+      id: '8',
+      title: 'Smartwatch',
+      image: 'assets/img/product/product-10.webp',
+      hoverImage: 'assets/img/product/product-10.webp',
+      price: 199.99,
+      rating: 4,
+      reviews: 14,
+      category: 'electronics',
+    },
+    {
+      id: '9',
+      title: 'Kids Bag',
+      image: 'assets/img/product/product-9.webp',
+      hoverImage: 'assets/img/product/product-9-variant.webp',
+      price: 59.99,
+      rating: 4.8,
+      reviews: 18,
+      category: 'accessories',
+    },
+    {
+      id: '10',
+      title: 'Elegant Shirt',
+      image: 'assets/img/product/product-11.webp',
+      hoverImage: 'assets/img/product/product-11-variant.webp',
+      price: 89.99,
+      oldPrice: 129.99,
+      rating: 4.5,
+      reviews: 24,
+      badge: 'Sale',
+      category: 'clothing',
+    },
+    {
+      id: '11',
+      title: 'Smartwatch',
+      image: 'assets/img/product/product-10.webp',
+      hoverImage: 'assets/img/product/product-10.webp',
+      price: 199.99,
+      rating: 4,
+      reviews: 14,
+      category: 'electronics',
+    },
+    {
+      id: '12',
+      title: 'Kids Bag',
+      image: 'assets/img/product/product-9.webp',
+      hoverImage: 'assets/img/product/product-9-variant.webp',
+      price: 59.99,
+      rating: 4.8,
+      reviews: 18,
+      category: 'accessories',
+    }
+  ];
 
-  constructor(private http: HttpClient, private cartService: CartService) {}
+  selectedCategory: string = 'all';
 
-  ngOnInit(): void {
-    this.http.get<any>('/assets/data/men-jeans/products.json').subscribe((data) => {
-      this.products = data.jeans;
-    });
+  get filteredProducts(): Product[] {
+    return this.selectedCategory === 'all'
+      ? this.products
+      : this.products.filter(product => product.category === this.selectedCategory);
   }
 
-  addToCart(product: any): void {
-    this.cartService.addToCart(product);
+  setCategory(category: string) {
+    this.selectedCategory = category;
   }
 }

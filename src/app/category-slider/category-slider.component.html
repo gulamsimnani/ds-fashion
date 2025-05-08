@@ -1,12 +1,15 @@
-<swiper [config]="swiperConfig" class="category-slider">
-  <ng-template swiperSlide *ngFor="let category of categories">
-    <div class="category-card">
-      <div class="category-image">
-        <img [src]="category.image" [alt]="category.title" class="img-fluid" />
+<ngx-slick-carousel
+  class="carousel"
+  [config]="slideConfig"
+>
+  <div ngxSlickItem *ngFor="let category of categories" class="slide px-2">
+    <div class="card text-center">
+      <img [src]="category.image" class="card-img-top" alt="{{ category.title }}" />
+      <div class="card-body">
+        <h5 class="card-title">{{ category.title }}</h5>
+        <p class="card-text">{{ category.count }} items</p>
+        <a [href]="category.link" class="btn btn-primary">Explore</a>
       </div>
-      <h3 class="category-title">{{ category.title }}</h3>
-      <p class="category-count">{{ category.count }} Products</p>
-      <a [routerLink]="['/category', category.slug]" class="stretched-link"></a>
     </div>
-  </ng-template>
-</swiper>
+  </div>
+</ngx-slick-carousel>

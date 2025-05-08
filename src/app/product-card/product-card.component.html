@@ -1,0 +1,32 @@
+
+<div class="product-item isotope-item filter-electronics mb-4" >
+    <div class="product-card h-100">
+      <div class="product-image position-relative">
+        <span *ngIf="product.badge" class="badge position-absolute top-0 start-0 m-2">{{ product.badge }}</span>
+        <img [src]="product.image" [alt]="product.title" class="img-fluid main-img" />
+        <img *ngIf="product.hoverImage" [src]="product.hoverImage" [alt]="product.title" class="img-fluid hover-img" />
+        <div class="product-overlay">
+          <a href="#" class="btn btn-sm btn-primary btn-cart"><i class="bi bi-cart-plus"></i> Add to Cart</a>
+          <div class="product-actions mt-2">
+            <a href="#" class="me-2 action-btn"><i class="bi bi-heart"></i></a>
+            <a href="#" class="me-2 action-btn"><i class="bi bi-eye"></i></a>
+            <a href="#"><i class="bi bi-arrow-left-right action-btn"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="product-info p-2">
+        <h5 class="product-title">{{ product.title }}</h5>
+        <div class="product-price">
+          <span class="text-success fw-bold">${{ product.price }}</span>
+          <span *ngIf="product.oldPrice" class="text-muted text-decoration-line-through ms-2">${{ product.oldPrice }}</span>
+        </div>
+        <div class="product-rating text-warning">
+          <ng-container *ngFor="let i of [1,2,3,4,5]; let idx = index">
+            <i class="bi" [ngClass]="{'bi-star-fill': idx < product.rating, 'bi-star': idx >= product.rating}"></i>
+          </ng-container>
+          <span class="text-muted ms-1">({{ product.reviews }})</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
