@@ -6,7 +6,7 @@
         <img [src]="product.image" [alt]="product.title" class="img-fluid main-img" />
         <img *ngIf="product.hoverImage" [src]="product.hoverImage" [alt]="product.title" class="img-fluid hover-img" />
         <div class="product-overlay">
-          <a href="#" class="btn btn-sm btn-primary btn-cart"><i class="bi bi-cart-plus"></i> Add to Cart</a>
+          <a (click)="handleAddToCart()" class="btn btn-sm btn-primary btn-cart"><i class="bi bi-cart-plus"></i> Add to Cart</a>
           <div class="product-actions mt-2">
             <a href="#" class="me-2 action-btn" title="add favourite"><i class="bi bi-heart"></i></a>
             <a (click)="sendItems()" class="me-2 action-btn" title="view item"><i class="bi bi-eye"></i></a>

@@ -12,6 +12,7 @@ import { CategoryTabsComponent } from '../category-tabs/category-tabs.component'
 })
 export class ProductListComponent {
   @Output() forwardView = new EventEmitter<void>();
+  @Output() forwardCart = new EventEmitter<any>();
   products: Product[] = [
     {
       id: '1',
@@ -160,4 +161,9 @@ export class ProductListComponent {
     this.forwardView.emit();
     console.log('B')
   }
+
+  onAddToCartItem(item: any) {
+    this.forwardCart.emit(item);
+  }
+  
 }

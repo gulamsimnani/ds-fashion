@@ -117,5 +117,8 @@ export class DashboardComponent implements AfterViewInit {
     this.router.navigate(['/products-details']);
   }
 
+  onAddToCart(item: any) {
+    this.router.navigate(['/cart']);
+  }
 }
 
