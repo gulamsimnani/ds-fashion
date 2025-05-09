@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component } from '@angular/core';
 import { CategorySliderComponent } from '../category-slider/category-slider.component';
 import { ProductListComponent } from '../product-list/product-list.component';
+import { Router } from '@angular/router';
 declare var AOS: any;
 declare var GLightbox: any;
 declare var Drift: any;
@@ -14,6 +15,7 @@ declare var Drift: any;
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements AfterViewInit {
+  constructor(private router: Router){}
 
   jeansCategories = [
     {
@@ -109,6 +111,10 @@ export class DashboardComponent implements AfterViewInit {
     AOS.init();
     GLightbox();
     // Initialize Drift here if required
+  }
+
+  viewDetails(): void{
+    this.router.navigate(['/products-details']);
   }
 
 }

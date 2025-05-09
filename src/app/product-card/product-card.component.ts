@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '../models/product.model';
 
@@ -11,4 +11,10 @@ import { Product } from '../models/product.model';
 })
 export class ProductCardComponent {
   @Input() product!: Product;
+  @Output() viewItem = new EventEmitter<any>();
+
+  sendItems() {
+    this.viewItem.emit();
+    console.log('C')
+  }
 }

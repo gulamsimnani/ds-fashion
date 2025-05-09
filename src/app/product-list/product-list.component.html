@@ -9,7 +9,7 @@
   <!-- Product Grid -->
   <div class="product-container isotope-container aos-init aos-animate" data-aos="fade-up" data-aos-delay="200" >
   <div class="row">
-    <app-product-card class="col-3"
+    <app-product-card (viewItem)="viewPoducts()" class="col-3"
       *ngFor="let product of filteredProducts"
       [product]="product"
     ></app-product-card>

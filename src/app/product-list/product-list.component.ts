@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '../models/product.model';
 import { ProductCardComponent } from '../product-card/product-card.component';
@@ -11,6 +11,7 @@ import { CategoryTabsComponent } from '../category-tabs/category-tabs.component'
   templateUrl: './product-list.component.html',
 })
 export class ProductListComponent {
+  @Output() forwardView = new EventEmitter<void>();
   products: Product[] = [
     {
       id: '1',
@@ -153,5 +154,10 @@ export class ProductListComponent {
 
   setCategory(category: string) {
     this.selectedCategory = category;
+  }
+
+  viewPoducts() {
+    this.forwardView.emit();
+    console.log('B')
   }
 }
