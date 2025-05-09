@@ -184,7 +184,9 @@
     <div
       class="category-slider"
     >
-    <app-category-slider></app-category-slider>
+    <!-- <app-category-slider [categories]="Jeanscategories"] ></app-category-slider> -->
+    <app-category-slider [categories]="jeansCategories" [slideConfig]="slideConfig"></app-category-slider> <!-- ✅ Correct -->
+
     </div>
   </div>
 </section>

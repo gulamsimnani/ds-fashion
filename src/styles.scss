@@ -3074,7 +3074,9 @@ section,
 .product-details .product-info {
   padding: 0 0.5rem;
 }
-
+.product-details .product-thumbnails  .card-body{
+  display: none;
+}
 @media (min-width: 992px) {
   .product-details .product-info {
     padding: 0 1rem;

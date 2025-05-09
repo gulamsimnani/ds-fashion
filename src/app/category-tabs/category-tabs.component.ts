@@ -11,7 +11,7 @@ export class CategoryTabsComponent {
   @Input() selectedCategory: string = 'all';
   @Output() categoryChange = new EventEmitter<string>();
 
-  categories: string[] = ['all', 'clothing', 'accessories', 'electronics'];
+  categories: string[] = ['all', 'Slim Fit', 'Straight Fit', 'Tapered Fit','Relaxed/Loose Fit'];
 
   setCategory(category: string) {
     this.categoryChange.emit(category);
