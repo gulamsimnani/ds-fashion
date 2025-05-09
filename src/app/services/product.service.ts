@@ -19,7 +19,7 @@ export class ProductService {
         oldPrice: 129.99,
         image: 'assets/img/product/product-11.webp',
         hoverImage: 'assets/img/product/product-11-variant.webp',
-        category: 'clothing',
+        category: 'slim',
         rating: 4.5,
         reviews: 24,
         badge: 'Sale'
@@ -29,7 +29,7 @@ export class ProductService {
         title: 'Wireless Headphones',
         price: 199.99,
         image: 'assets/img/product/product-10.webp',
-        category: 'electronics',
+        category: 'straight',
         rating: 4.0,
         reviews: 18
       },
@@ -38,7 +38,7 @@ export class ProductService {
         title: 'Leather Wallet',
         price: 49.99,
         image: 'assets/img/product/product-9.webp',
-        category: 'accessories',
+        category: 'loose',
         rating: 4.2,
         reviews: 30
       }

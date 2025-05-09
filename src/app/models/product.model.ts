@@ -9,5 +9,6 @@ export interface Product {
   rating: number; // out of 5
   reviews: number;
   badge?: string; // e.g., "Sale"
-  category: 'clothing' | 'accessories' | 'electronics';
+  category: 'slim' | 'straight' | 'tapered' | 'loose';
+  bestseller?: boolean
 }

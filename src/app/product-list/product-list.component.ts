@@ -22,7 +22,7 @@ export class ProductListComponent {
       rating: 4.5,
       reviews: 24,
       badge: 'Sale',
-      category: 'clothing',
+      category: 'slim',
     },
     {
       id: '2',
@@ -33,7 +33,7 @@ export class ProductListComponent {
       rating: 4,
       reviews: 14,
       badge: 'New',
-      category: 'electronics',
+      category: 'slim',
     },
     {
       id: '3',
@@ -43,7 +43,7 @@ export class ProductListComponent {
       price: 59.99,
       rating: 4.8,
       reviews: 18,
-      category: 'accessories',
+      category: 'slim',
     },
     {
       id: '4',
@@ -55,7 +55,7 @@ export class ProductListComponent {
       rating: 4.5,
       reviews: 24,
       badge: 'Sale',
-      category: 'clothing',
+      category: 'straight',
     },
     {
       id: '5',
@@ -65,7 +65,7 @@ export class ProductListComponent {
       price: 199.99,
       rating: 4,
       reviews: 14,
-      category: 'electronics',
+      category: 'straight',
     },
     {
       id: '6',
@@ -75,7 +75,7 @@ export class ProductListComponent {
       price: 59.99,
       rating: 4.8,
       reviews: 18,
-      category: 'accessories',
+      category: 'straight',
     },
     {
       id: '7',
@@ -87,7 +87,7 @@ export class ProductListComponent {
       rating: 4.5,
       reviews: 24,
       badge: 'Sale',
-      category: 'clothing',
+      category: 'straight',
     },
     {
       id: '8',
@@ -97,7 +97,7 @@ export class ProductListComponent {
       price: 199.99,
       rating: 4,
       reviews: 14,
-      category: 'electronics',
+      category: 'tapered',
     },
     {
       id: '9',
@@ -107,7 +107,7 @@ export class ProductListComponent {
       price: 59.99,
       rating: 4.8,
       reviews: 18,
-      category: 'accessories',
+      category: 'tapered',
     },
     {
       id: '10',
@@ -119,7 +119,7 @@ export class ProductListComponent {
       rating: 4.5,
       reviews: 24,
       badge: 'Sale',
-      category: 'clothing',
+      category: 'tapered',
     },
     {
       id: '11',
@@ -129,7 +129,7 @@ export class ProductListComponent {
       price: 199.99,
       rating: 4,
       reviews: 14,
-      category: 'electronics',
+      category: 'tapered',
     },
     {
       id: '12',
@@ -139,7 +139,7 @@ export class ProductListComponent {
       price: 59.99,
       rating: 4.8,
       reviews: 18,
-      category: 'accessories',
+      category: 'loose',
     }
   ];
 
