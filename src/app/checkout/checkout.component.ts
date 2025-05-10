@@ -23,6 +23,26 @@ export class CheckoutComponent implements OnInit {
     FREESHIP: 5,
     WELCOME15: 15,
   };
+
+  // Customer Information
+customer = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: ''
+};
+
+// Shipping Address
+shippingAddress = {
+  address: '',
+  apartment: '',
+  city: '',
+  state: '',
+  zip: '',
+  country: '',
+  saveAddress: false,
+  billingSameAsShipping: true
+};
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
@@ -53,4 +73,9 @@ export class CheckoutComponent implements OnInit {
     let discountAmount = (this.promoDiscount / 100) * totalBeforeDiscount;
     this.total = +(totalBeforeDiscount - discountAmount).toFixed(2);
   }
+  submitOrder() {
+  console.log('Customer Info:', this.customer);
+  console.log('Shipping Address:', this.shippingAddress);
+  // You can call your backend API to save this data
+}
 }
