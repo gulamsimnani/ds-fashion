@@ -56,6 +56,11 @@
           </div>
 
           <!-- Cart Item 1 -->
+          <div  class="cart-item aos-init aos-animate"
+            data-aos="fade-up"
+            data-aos-delay="100" *ngIf="cartItems.length === 0" class="text-center py-10 text-gray-500">
+                🛒 Your cart is empty.
+          </div>
           <div 
             class="cart-item aos-init aos-animate"
             data-aos="fade-up"
