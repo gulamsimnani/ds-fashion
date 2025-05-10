@@ -368,43 +368,28 @@
         >
           <div class="order-summary-header">
             <h3>Order Summary</h3>
-            <span class="item-count">2 Items</span>
+            <span class="item-count">{{ cartItems.length }} Items</span>
           </div>
 
           <div class="order-summary-content">
             <div class="order-items">
-              <div class="order-item">
+              <div class="order-item" *ngFor="let item of cartItems">
                 <div class="order-item-image">
                   <img
-                    src="assets/img/product/product-1.webp"
-                    alt="Product"
+                    [src]="item.image"
+                    [alt]="item.title"
                     class="img-fluid"
                   />
                 </div>
                 <div class="order-item-details">
-                  <h4>Lorem Ipsum Dolor</h4>
-                  <p class="order-item-variant">Color: Black | Size: M</p>
+                  <h4>{{ item.title }}</h4>
+                  <p class="order-item-variant" *ngIf="item.color || item.size">
+                    Color: {{ item.color || "N/A" }} | Size:
+                    {{ item.size || "N/A" }}
+                  </p>
                   <div class="order-item-price">
-                    <span class="quantity">1 ×</span>
-                    <span class="price">$89.99</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="order-item">
-                <div class="order-item-image">
-                  <img
-                    src="assets/img/product/product-2.webp"
-                    alt="Product"
-                    class="img-fluid"
-                  />
-                </div>
-                <div class="order-item-details">
-                  <h4>Sit Amet Consectetur</h4>
-                  <p class="order-item-variant">Color: White | Size: L</p>
-                  <div class="order-item-price">
-                    <span class="quantity">2 ×</span>
-                    <span class="price">$59.99</span>
+                    <span class="quantity">{{ item.quantity }} ×</span>
+                    <span class="price">${{ item.price }}</span>
                   </div>
                 </div>
               </div>
@@ -416,30 +401,52 @@
                   type="text"
                   class="form-control"
                   placeholder="Promo Code"
-                  aria-label="Promo Code"
+                  [(ngModel)]="promoCode"
                 />
-                <button class="btn btn-outline-primary" type="button">
+                <button
+                  class="btn btn-outline-primary"
+                  type="button"
+                  (click)="applyPromoCode()"
+                >
                   Apply
                 </button>
+              </div>
+              <div *ngIf="promoDiscount > 0" class="text-success mt-2">
+                Promo applied: <strong>{{ promoDiscount }}%</strong> off
               </div>
             </div>
 
             <div class="order-totals">
               <div class="order-subtotal d-flex justify-content-between">
                 <span>Subtotal</span>
-                <span>$209.97</span>
+                <span>${{ subtotal.toFixed(2) }}</span>
               </div>
               <div class="order-shipping d-flex justify-content-between">
                 <span>Shipping</span>
-                <span>$9.99</span>
+                <span>${{ shipping.toFixed(2) }}</span>
               </div>
               <div class="order-tax d-flex justify-content-between">
                 <span>Tax</span>
-                <span>$21.00</span>
+                <span>${{ tax.toFixed(2) }}</span>
               </div>
+              <div
+                *ngIf="promoDiscount > 0"
+                class="order-discount d-flex justify-content-between text-success"
+              >
+                <span>Promo Discount ({{ promoDiscount }}%)</span>
+                <span
+                  >- ${{
+                    (
+                      ((subtotal + shipping + tax) * promoDiscount) /
+                      100
+                    ).toFixed(2)
+                  }}</span
+                >
+              </div>
+
               <div class="order-total d-flex justify-content-between">
                 <span>Total</span>
-                <span>$240.96</span>
+                <span>${{ total.toFixed(2) }}</span>
               </div>
             </div>
 
