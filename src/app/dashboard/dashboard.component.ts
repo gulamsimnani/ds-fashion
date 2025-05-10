@@ -3,6 +3,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import { CategorySliderComponent } from '../category-slider/category-slider.component';
 import { ProductListComponent } from '../product-list/product-list.component';
 import { Router } from '@angular/router';
+import { CartItem, CartService } from '../services/cart.service';
 declare var AOS: any;
 declare var GLightbox: any;
 declare var Drift: any;
@@ -15,8 +16,7 @@ declare var Drift: any;
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements AfterViewInit {
-  constructor(private router: Router){}
-
+  constructor(private router: Router, private cartService: CartService){}
   jeansCategories = [
     {
       image: 'assets/img/product/product-1.webp',
@@ -117,7 +117,10 @@ export class DashboardComponent implements AfterViewInit {
     this.router.navigate(['/products-details']);
   }
 
-  onAddToCart(item: any) {
+  onAddToCart(product: any) {
+    console.log("product", product);
+    const item: CartItem = { ...product, quantity: 1 };
+    this.cartService.addToCart(item);
     this.router.navigate(['/cart']);
   }
 }

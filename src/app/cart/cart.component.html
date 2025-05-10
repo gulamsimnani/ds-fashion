@@ -25,6 +25,18 @@
         data-aos="fade-up"
         data-aos-delay="200"
       >
+      <!-- <div *ngFor="let item of cartItems">
+        <img [src]="item.image" />
+        <h4>{{ item.name }}</h4>
+        <p>Price: {{ item.price | currency }}</p>
+        <input type="number" [(ngModel)]="item.quantity" (change)="updateQuantity(item.id, item.quantity)" min="1" />
+        <p>Total: {{ item.quantity * item.price | currency }}</p>
+        <button (click)="removeItem(item.id)">Remove</button>
+      </div> -->
+      
+      <!-- <h3>Cart Total: {{ getTotal() | currency }}</h3>
+      <button (click)="clearCart()">Clear Cart</button> -->
+      
         <div class="cart-items">
           <div class="cart-header d-none d-lg-block">
             <div class="row align-items-center gy-4">
@@ -44,12 +56,67 @@
           </div>
 
           <!-- Cart Item 1 -->
-          <div
+          <div 
             class="cart-item aos-init aos-animate"
             data-aos="fade-up"
-            data-aos-delay="100"
-          >
+            data-aos-delay="100" *ngFor="let item of cartItems">
+          <!-- <ng-container > -->
             <div class="row align-items-center gy-4">
+              <div class="col-lg-6 col-12 mb-3 mb-lg-0">
+                <div class="product-info d-flex align-items-center">
+                  <div class="product-image">
+                    <img
+                      [src]="item.image"
+                      alt="Product"
+                      class="img-fluid"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="product-details">
+                    <h6 class="product-title">{{ item.title }}</h6>
+                    <div class="product-meta">
+                      <span class="product-color">Color: Black</span>
+                      <span class="product-size">Size: M</span>
+                    </div>
+                    <button class="remove-item" type="button" (click)="removeItem(item.id)">
+                      <i class="bi bi-trash"></i> Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-2 text-center">
+                <div class="price-tag">
+                  <span class="current-price">{{item.price | currency}}</span>
+                </div>
+              </div>
+              <div class="col-12 col-lg-2 text-center">
+                <div class="quantity-selector">
+                  <button class="quantity-btn decrease" (click)="decrease(item.id)">
+                    <i class="bi bi-dash"></i>
+                  </button>
+                
+                  <input
+                    type="number"
+                    class="quantity-input"
+                    [(ngModel)]="item.quantity"
+                    (change)="updateQuantity(item.id, item.quantity)"
+                    min="1"
+                    max="10"
+                  />
+                
+                  <button class="quantity-btn increase" (click)="increase(item.id)">
+                    <i class="bi bi-plus"></i>
+                  </button>
+                </div>
+                
+              </div>
+              <div class="col-12 col-lg-2 text-center mt-3 mt-lg-0">
+                <div class="item-total">
+                  <span>{{ item.quantity * item.price | currency }}</span>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="row align-items-center gy-4">
               <div class="col-lg-6 col-12 mb-3 mb-lg-0">
                 <div class="product-info d-flex align-items-center">
                   <div class="product-image">
@@ -99,12 +166,12 @@
                   <span>$89.99</span>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
           <!-- End Cart Item -->
 
           <!-- Cart Item 2 -->
-          <div
+          <!-- <div
             class="cart-item aos-init aos-animate"
             data-aos="fade-up"
             data-aos-delay="200"
@@ -161,11 +228,11 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- End Cart Item -->
 
           <!-- Cart Item 3 -->
-          <div
+          <!-- <div
             class="cart-item aos-init aos-animate"
             data-aos="fade-up"
             data-aos-delay="300"
@@ -221,7 +288,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- End Cart Item -->
 
           <div class="cart-actions">
@@ -233,16 +300,22 @@
                       type="text"
                       class="form-control"
                       placeholder="Coupon code"
+                      [(ngModel)]="couponCode"
+                      name="couponCode"
                     />
-                    <button class="btn btn-accent" type="button">Apply</button>
+                    <button class="btn btn-accent" type="button" (click)="applyCoupon()">Apply</button>
+                  </div>
+                  <div *ngIf="couponMessage" class="mt-2 text-sm" [ngClass]="{'text-success': discountPercentage > 0, 'text-danger': discountPercentage === 0}">
+                    {{ couponMessage }}
                   </div>
                 </div>
+                
               </div>
               <div class="col-lg-6 col-md-6 text-md-end">
                 <button class="btn btn-outline-accent me-2">
                   <i class="bi bi-arrow-clockwise"></i> Update
                 </button>
-                <button class="btn btn-outline-danger">
+                <button class="btn btn-outline-danger" (click)="clearCart()">
                   <i class="bi bi-trash"></i> Clear
                 </button>
               </div>
@@ -261,7 +334,7 @@
 
           <div class="summary-item">
             <span class="summary-label">Subtotal</span>
-            <span class="summary-value">$269.96</span>
+            <span class="summary-value">{{ getSubtotal() | currency }}</span>
           </div>
 
           <div class="summary-item shipping-item">
@@ -273,29 +346,36 @@
                   type="radio"
                   name="shipping"
                   id="standard"
-                  checked=""
+                  [checked]="shippingMethod === 'standard'"
+                  (change)="onShippingChange('standard')"
                 />
                 <label class="form-check-label" for="standard">
                   Standard Delivery - $4.99
                 </label>
               </div>
+          
               <div class="form-check">
                 <input
                   class="form-check-input"
                   type="radio"
                   name="shipping"
                   id="express"
+                  [checked]="shippingMethod === 'express'"
+                  (change)="onShippingChange('express')"
                 />
                 <label class="form-check-label" for="express">
                   Express Delivery - $12.99
                 </label>
               </div>
+          
               <div class="form-check">
                 <input
                   class="form-check-input"
                   type="radio"
                   name="shipping"
                   id="free"
+                  [checked]="shippingMethod === 'free'"
+                  (change)="onShippingChange('free')"
                 />
                 <label class="form-check-label" for="free">
                   Free Shipping (Orders over $300)
@@ -303,21 +383,24 @@
               </div>
             </div>
           </div>
+          
 
           <div class="summary-item">
             <span class="summary-label">Tax</span>
-            <span class="summary-value">$27.00</span>
+            <span class="summary-value">{{tax | currency}}</span>
           </div>
 
-          <div class="summary-item discount">
+          <div *ngIf="discountAmount > 0" class="summary-item discount">
             <span class="summary-label">Discount</span>
-            <span class="summary-value">-$0.00</span>
+            <span class="summary-value text-success">-{{discountAmount | currency}}</span>
           </div>
+          
 
           <div class="summary-total">
             <span class="summary-label">Total</span>
-            <span class="summary-value">$301.95</span>
+            <span class="summary-value">{{ getFinalTotal() | currency }}</span>
           </div>
+          
 
           <div class="checkout-button">
             <a href="#" class="btn btn-accent w-100">

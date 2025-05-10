@@ -1,5 +1,5 @@
 export interface Product {
-  id?: string | number;
+  id: string | number;
   title: string;
   description?: string;
   image: string;
@@ -10,5 +10,7 @@ export interface Product {
   reviews: number;
   badge?: string; // e.g., "Sale"
   category: 'slim' | 'straight' | 'tapered' | 'loose';
-  bestseller?: boolean
+  bestseller?: boolean;
+  color?: string;
+  size?: string;
 }

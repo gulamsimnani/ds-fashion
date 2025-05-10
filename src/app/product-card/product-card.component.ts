@@ -16,17 +16,17 @@ export class ProductCardComponent {
 
   sendItems() {
     this.viewItem.emit();
-    console.log('C')
   }
 
   handleAddToCart() {
     const item = {
       productId: this.product.id,
-      name: this.product.id,
+      title: this.product.title,
       image: this.product.image,
       price: this.product.price,
-      quantity: 1
-      // Add size, color, etc. if applicable
+      quantity: 1,
+      color: this.product.color,
+      size: this.product.size
     };
   
     this.addToCart.emit(item);

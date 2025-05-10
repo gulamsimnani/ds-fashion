@@ -159,10 +159,10 @@ export class ProductListComponent {
 
   viewPoducts() {
     this.forwardView.emit();
-    console.log('B')
   }
 
   onAddToCartItem(item: any) {
+    console.log("add cart", item);
     this.forwardCart.emit(item);
   }
   
