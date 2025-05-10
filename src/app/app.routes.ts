@@ -21,10 +21,10 @@ export const appRoutes: Routes = [
   { path: 'about', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'cart', component: CartComponent },
-  {path: 'products-details', component: ProductDetailsComponent},
-  {path: 'checkout', component: CheckoutComponent},
-  {path: 'tos', component: TosComponent},
-  {path: 'privacy', component: PrivacyComponent},
-  {path: 'myprofile', component: MyprofileComponent},
-  {path: 'login', component: LoginComponent}
+  { path: 'product-detail/:id', component: ProductDetailsComponent},
+  { path: 'checkout', component: CheckoutComponent},
+  { path: 'tos', component: TosComponent},
+  { path: 'privacy', component: PrivacyComponent},
+  { path: 'myprofile', component: MyprofileComponent},
+  { path: 'login', component: LoginComponent}
 ];

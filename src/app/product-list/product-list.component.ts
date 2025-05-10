@@ -11,7 +11,7 @@ import { CategoryTabsComponent } from '../category-tabs/category-tabs.component'
   templateUrl: './product-list.component.html',
 })
 export class ProductListComponent {
-  @Output() forwardView = new EventEmitter<void>();
+  @Output() forwardView = new EventEmitter<string>();
   @Output() forwardCart = new EventEmitter<any>();
   products: Product[] = [
     {
@@ -207,8 +207,9 @@ export class ProductListComponent {
     this.selectedCategory = category;
   }
 
-  viewPoducts() {
-    this.forwardView.emit();
+  viewPoducts(productId: string) {
+    console.log("add cart", productId);
+    this.forwardView.emit(productId);
   }
 
   onAddToCartItem(item: any) {

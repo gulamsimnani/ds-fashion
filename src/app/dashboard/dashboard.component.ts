@@ -113,9 +113,13 @@ export class DashboardComponent implements AfterViewInit {
     // Initialize Drift here if required
   }
 
-  viewDetails(): void{
-    this.router.navigate(['/products-details']);
-  }
+   goToProductDetail(product: any) {
+  // Assuming `productId` is the id of the product
+this.router.navigate(['/product-detail', product.productId], {
+  state: { product: product }
+});
+
+}
 
   onAddToCart(product: any) {
     console.log("product", product);

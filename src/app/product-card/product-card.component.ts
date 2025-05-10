@@ -15,7 +15,17 @@ export class ProductCardComponent {
   @Output() addToCart = new EventEmitter<any>();
 
   sendItems() {
-    this.viewItem.emit();
+    const product = {
+      productId: this.product.id,
+      title: this.product.title,
+      image: this.product.image,
+      price: this.product.price,
+      quantity: 1,
+      color: this.product.color,
+      size: this.product.size,
+      category: this.product.category
+    };
+    this.viewItem.emit(product);
   }
 
   handleAddToCart() {

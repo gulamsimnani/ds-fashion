@@ -52,145 +52,108 @@
       </div>
 
       <!-- Product Info -->
-      <div
-        class="col-lg-6 aos-init aos-animate"
-        data-aos="fade-left"
-        data-aos-delay="200"
-      >
-        <div class="product-info">
-          <div class="product-meta mb-2">
-            <span class="product-category">Headphones</span>
-            <div class="product-rating">
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-half"></i>
-              <span class="rating-count">(42)</span>
-            </div>
-          </div>
+      <div class="col-lg-6 aos-init aos-animate" data-aos="fade-left" data-aos-delay="200">
+  <div class="product-info">
+    <div class="product-meta mb-2">
+      <span class="product-category">{{ product?.category }}</span>
+      <div class="product-rating">
+        <!-- Render filled stars -->
+        <i class="bi bi-star-fill" *ngFor="let star of [].constructor(getFilledStars()); let i = index"></i>
+        <!-- Render half star if applicable -->
+        <i class="bi bi-star-half" *ngIf="getHalfStar()"></i>
+        <!-- Render empty stars -->
+        <i class="bi bi-star" *ngFor="let star of [].constructor(getEmptyStars()); let i = index"></i>
+        <span class="rating-count">({{ product?.ratingCount }})</span>
+      </div>
+    </div>
 
-          <h1 class="product-title">
-            Lorem Ipsum Wireless Noise Cancelling Headphones
-          </h1>
+    <h1 class="product-title">{{ product?.name }}</h1>
 
-          <div class="product-price-container mb-4">
-            <span class="current-price">$249.99</span>
-            <span class="original-price">$299.99</span>
-            <span class="discount-badge">-17%</span>
-          </div>
+    <div class="product-price-container mb-4">
+      <span class="current-price">{{ product?.price | currency }}</span>
+      <span class="original-price">{{ product?.originalPrice | currency }}</span>
+      <span class="discount-badge">-{{ product?.discount }}%</span>
+    </div>
 
-          <div class="product-short-description mb-4">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Vestibulum at lacus congue, suscipit elit nec, tincidunt orci.
-              Phasellus egestas nisi vitae lectus imperdiet venenatis.
-            </p>
-          </div>
+    <div class="product-short-description mb-4">
+      <p>{{ product?.description }}</p>
+    </div>
 
-          <div class="product-availability mb-4">
-            <i class="bi bi-check-circle-fill text-success"></i>
-            <span>In Stock</span>
-            <span class="stock-count">(24 items left)</span>
-          </div>
+    <div class="product-availability mb-4">
+      <i class="bi bi-check-circle-fill text-success"></i>
+      <span>{{ product?.countInStock > 0 ? 'In Stock' : 'Out of Stock' }}</span>
+      <span class="stock-count">({{ product?.countInStock }} items left)</span>
+    </div>
 
-          <!-- Color Options -->
-          <div class="product-colors mb-4">
-            <h6 class="option-title">Color:</h6>
-            <div class="color-options">
-              <div
-                class="color-option active"
-                data-color="Black"
-                style="background-color: #222"
-              >
-                <i class="bi bi-check"></i>
-              </div>
-              <div
-                class="color-option"
-                data-color="Silver"
-                style="background-color: #c0c0c0"
-              >
-                <i class="bi bi-check"></i>
-              </div>
-              <div
-                class="color-option"
-                data-color="Blue"
-                style="background-color: #1e3a8a"
-              >
-                <i class="bi bi-check"></i>
-              </div>
-              <div
-                class="color-option"
-                data-color="Rose Gold"
-                style="background-color: #b76e79"
-              >
-                <i class="bi bi-check"></i>
-              </div>
-            </div>
-            <span class="selected-option">Black</span>
-          </div>
-
-          <!-- Size Options if applicable -->
-          <div class="product-sizes mb-4">
-            <h6 class="option-title">Size:</h6>
-            <div class="size-options">
-              <div class="size-option" data-size="S">S</div>
-              <div class="size-option active" data-size="M">M</div>
-              <div class="size-option" data-size="L">L</div>
-            </div>
-            <span class="selected-option">M</span>
-          </div>
-
-          <!-- Quantity Selector -->
-          <div class="product-quantity mb-4">
-            <h6 class="option-title">Quantity:</h6>
-            <div class="quantity-selector">
-              <button class="quantity-btn decrease">
-                <i class="bi bi-dash"></i>
-              </button>
-              <input
-                type="number"
-                class="quantity-input"
-                value="1"
-                min="1"
-                max="24"
-              />
-              <button class="quantity-btn increase">
-                <i class="bi bi-plus"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Action Buttons -->
-          <div class="product-actions">
-            <button class="btn btn-primary add-to-cart-btn">
-              <i class="bi bi-cart-plus"></i> Add to Cart
-            </button>
-            <button class="btn btn-outline-primary buy-now-btn">
-              <i class="bi bi-lightning-fill"></i> Buy Now
-            </button>
-            <button class="btn btn-outline-secondary wishlist-btn">
-              <i class="bi bi-heart"></i>
-            </button>
-          </div>
-
-          <!-- Additional Info -->
-          <div class="additional-info mt-4">
-            <div class="info-item">
-              <i class="bi bi-truck"></i>
-              <span>Free shipping on orders over $50</span>
-            </div>
-            <div class="info-item">
-              <i class="bi bi-arrow-repeat"></i>
-              <span>30-day return policy</span>
-            </div>
-            <div class="info-item">
-              <i class="bi bi-shield-check"></i>
-              <span>2-year warranty</span>
-            </div>
-          </div>
+    <!-- Color Options -->
+    <div class="product-colors mb-4">
+      <h6 class="option-title">Color:</h6>
+      <div class="color-options">
+        <div *ngFor="let color of product?.colors" 
+             class="color-option"
+             [style.background-color]="color">
+          <i class="bi bi-check"></i>
         </div>
       </div>
+      <span class="selected-option">{{ product?.colors[0] }}</span>
+    </div>
+
+    <!-- Size Options if applicable -->
+    <div class="product-sizes mb-4" *ngIf="product?.sizes?.length > 0">
+      <h6 class="option-title">Size:</h6>
+      <div class="size-options">
+        <div *ngFor="let size of product?.sizes" 
+             class="size-option"
+             [class.active]="size === 'M'">{{ size }}</div>
+      </div>
+      <span class="selected-option">M</span>
+    </div>
+
+    <!-- Quantity Selector -->
+    <div class="product-quantity mb-4">
+      <h6 class="option-title">Quantity:</h6>
+      <div class="quantity-selector">
+        <button class="quantity-btn decrease">
+          <i class="bi bi-dash"></i>
+        </button>
+        <input type="number" class="quantity-input" value="1" min="1" max="{{ product?.countInStock }}" />
+        <button class="quantity-btn increase">
+          <i class="bi bi-plus"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="product-actions">
+      <button class="btn btn-primary add-to-cart-btn">
+        <i class="bi bi-cart-plus"></i> Add to Cart
+      </button>
+      <button class="btn btn-outline-primary buy-now-btn">
+        <i class="bi bi-lightning-fill"></i> Buy Now
+      </button>
+      <button class="btn btn-outline-secondary wishlist-btn">
+        <i class="bi bi-heart"></i>
+      </button>
+    </div>
+
+    <!-- Additional Info -->
+    <div class="additional-info mt-4">
+      <div class="info-item">
+        <i class="bi bi-truck"></i>
+        <span>Free shipping on orders over $50</span>
+      </div>
+      <div class="info-item">
+        <i class="bi bi-arrow-repeat"></i>
+        <span>30-day return policy</span>
+      </div>
+      <div class="info-item">
+        <i class="bi bi-shield-check"></i>
+        <span>2-year warranty</span>
+      </div>
+    </div>
+  </div>
+</div>
+
     </div>
 
     <!-- Product Details Tabs -->
