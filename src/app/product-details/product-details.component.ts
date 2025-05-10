@@ -88,7 +88,7 @@ export class ProductDetailsComponent implements OnInit {
 
     // Example mock data - you can replace this with an API call
     this.product = {
-      name: 'Wireless Noise Cancelling Headphones',
+      name: 'Denim Jeans',
       description: 'Lorem ipsum dolor sit amet...',
       price: 249.99,
       rating: 4.5,
