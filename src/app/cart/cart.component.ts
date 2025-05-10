@@ -47,10 +47,11 @@ export class CartComponent {
     this.recalculateCharges();
   }
 
-  removeItem(id: number): void {
-    this.cartService.removeItem(id);
-    this.recalculateCharges();
-  }
+  removeItem(item: CartItem): void {
+  this.cartService.removeItem(item);
+  this.recalculateCharges();
+}
+
 
   clearCart(): void {
     this.cartService.clearCart();

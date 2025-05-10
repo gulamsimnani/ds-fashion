@@ -9,6 +9,7 @@ export interface CartItem {
   quantity: number;
   color?: string;
   size?: string;
+  category: string;
 }
 
 @Injectable({
@@ -34,18 +35,27 @@ export class CartService {
   }
 
   addToCart(item: CartItem): void {
-    const currentItems = this.getItems();
-    const index = currentItems.findIndex((p) => p.id === item.id);
+  const currentItems = this.getItems();
 
-    if (index > -1) {
-      currentItems[index].quantity += item.quantity;
-    } else {
-      currentItems.push(item);
-    }
+  // Check if the same item (id + color + size + category) exists
+  const index = currentItems.findIndex(
+    (p) =>
+      p.id === item.id &&
+      p.color === item.color &&
+      p.size === item.size &&
+      p.category === item.category
+  );
 
-    this.cartItemsSubject.next(currentItems);
-    this.updateLocalStorage(currentItems);
+  if (index > -1) {
+    currentItems[index].quantity += item.quantity;
+  } else {
+    currentItems.push(item);
   }
+
+  this.cartItemsSubject.next(currentItems);
+  this.updateLocalStorage(currentItems);
+}
+
 
   updateQuantity(id: number, quantity: number): void {
     const updatedItems = this.getItems().map((item) =>
@@ -75,11 +85,20 @@ export class CartService {
     this.updateLocalStorage(updatedItems);
   }
 
-  removeItem(id: number): void {
-    const currentItems = this.getItems().filter((item) => item.id !== id);
-    this.cartItemsSubject.next(currentItems);
-    this.updateLocalStorage(currentItems);
-  }
+  removeItem(itemToRemove: CartItem): void {
+  const currentItems = this.getItems().filter(
+    (item) =>
+      !(
+        item.id === itemToRemove.id &&
+        item.color === itemToRemove.color &&
+        item.size === itemToRemove.size &&
+        item.category === itemToRemove.category
+      )
+  );
+  this.cartItemsSubject.next(currentItems);
+  this.updateLocalStorage(currentItems);
+}
+
 
   clearCart(): void {
     this.cartItemsSubject.next([]);

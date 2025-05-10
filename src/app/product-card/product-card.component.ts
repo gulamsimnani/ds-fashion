@@ -26,7 +26,8 @@ export class ProductCardComponent {
       price: this.product.price,
       quantity: 1,
       color: this.product.color,
-      size: this.product.size
+      size: this.product.size,
+      category: this.product.category
     };
   
     this.addToCart.emit(item);
