@@ -1,0 +1,24 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <input formControlName="title" placeholder="Title" required />
+  <input formControlName="description" placeholder="Description" />
+  <input type="number" formControlName="price" placeholder="Price" />
+  <input type="number" formControlName="oldPrice" placeholder="Old Price" />
+  <input type="number" formControlName="rating" placeholder="Rating" />
+  <input type="number" formControlName="reviews" placeholder="Reviews" />
+  <input formControlName="category" placeholder="Category" />
+  <input formControlName="color" placeholder="Color" />
+  <input formControlName="size" placeholder="Size" />
+  <label>
+    <input type="checkbox" formControlName="bestseller" /> Bestseller
+  </label>
+  <input type="file" (change)="onFileChange($event)" />
+  <button type="submit">{{ selectedProductId ? 'Update' : 'Create' }}</button>
+</form>
+
+<ul>
+  <li *ngFor="let product of products">
+    {{ product.title }} - ₹{{ product.price }}
+    <button (click)="onEdit(product)">Edit</button>
+    <button (click)="onDelete(product._id!)">Delete</button>
+  </li>
+</ul>

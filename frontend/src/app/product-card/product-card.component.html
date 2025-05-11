@@ -3,7 +3,7 @@
     <div class="product-card h-100">
       <div class="product-image position-relative">
         <span *ngIf="product.badge" class="badge position-absolute top-0 start-0 m-2">{{ product.badge }}</span>
-        <img [src]="product.image" [alt]="product.title" class="img-fluid main-img" />
+        <img [src]="getImageUrl(product.image)" [alt]="product.title" class="img-fluid main-img" />
         <img *ngIf="product.hoverImage" [src]="product.hoverImage" [alt]="product.title" class="img-fluid hover-img" />
         <div class="product-overlay">
           <a (click)="handleAddToCart()" class="btn btn-sm btn-primary btn-cart"><i class="bi bi-cart-plus"></i> Add to Cart</a>
@@ -22,7 +22,7 @@
         </div>
         <div class="product-rating text-warning">
           <ng-container *ngFor="let i of [1,2,3,4,5]; let idx = index">
-            <i class="bi" [ngClass]="{'bi-star-fill': idx < product.rating, 'bi-star': idx >= product.rating}"></i>
+            <!-- <i class="bi" [ngClass]="{'bi-star-fill': idx < product.rating, 'bi-star': idx >= product.rating}"></i> -->
           </ng-container>
           <span class="text-muted ms-1">({{ product.reviews }})</span>
         </div>

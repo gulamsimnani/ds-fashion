@@ -12,6 +12,7 @@ import { TosComponent } from './tos/tos.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
 import { LoginComponent } from './login/login.component';
+import { ProductManagementComponent } from './product-management/product-management.component';
 
 export const appRoutes: Routes = [
   { path: '', component: DashboardComponent },
@@ -26,5 +27,7 @@ export const appRoutes: Routes = [
   { path: 'tos', component: TosComponent},
   { path: 'privacy', component: PrivacyComponent},
   { path: 'myprofile', component: MyprofileComponent},
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent},
+  { path: 'admin/products', component: ProductManagementComponent }
+
 ];
