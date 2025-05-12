@@ -1,9 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Product } from '../models/product.model';
 import { ProductService } from '../services/product.service';
-
 
 @Component({
   selector: 'app-product-management',
@@ -12,89 +16,105 @@ import { ProductService } from '../services/product.service';
   templateUrl: './product-management.component.html',
 })
 export class ProductManagementComponent implements OnInit {
-  productForm: FormGroup;
+  productForm!: FormGroup;
   products: Product[] = [];
-  selectedProductId?: string;
+  selectedFiles: File[] = [];
+  selectedProductId: string | null = null;
   imageFile?: File;
 
-  constructor(private fb: FormBuilder, private productService: ProductService) {
+  constructor(
+    private fb: FormBuilder,
+    private productService: ProductService
+  ) {}
+
+  ngOnInit() {
     this.productForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
       price: [0, Validators.required],
-      oldPrice: [''],
-      rating: [''],
-      reviews: [''],
+      oldPrice: [0],
+      rating: [0],
+      reviews: [0],
       category: [''],
-      color: [''],
+      color: ['', Validators.required],
       size: [''],
-      bestseller: [false],
-      image: [null]
+      bestseller: [false, Validators.required],
+      images: [null],
     });
-  }
-
-  ngOnInit() {
     this.loadProducts();
   }
 
   loadProducts() {
-    this.productService.getAll().subscribe((res: Product[] | any) => {
-    this.products = res.products || [];
-    console.log("product", this.products)
-  });
-  }
-
-  onFileChange(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.imageFile = file;
-    }
-  }
-
-  onSubmit() {
-    const formData = new FormData();
-    Object.entries(this.productForm.value).forEach(([key, value]) => {
-  if (value !== null && value !== undefined) {
-    if (value instanceof File) {
-      formData.append(key, value);
-    } else {
-      formData.append(key, value.toString()); // ✅ Ensure string type
-    }
-  }
-});
-
-    if (this.imageFile) {
-      formData.append('image', this.imageFile);
-    }
-
-    if (this.selectedProductId) {
-      formData.append('_id', this.selectedProductId);
-      this.productService.update({ _id: this.selectedProductId, ...this.productForm.value }).subscribe(() => {
-        this.resetForm();
-        this.loadProducts();
-      });
-    } else {
-      this.productService.create(formData).subscribe(() => {
-        this.resetForm();
-        this.loadProducts();
-      });
-    }
-  }
-
-  onEdit(product: Product) {
-    this.selectedProductId = product._id;
-    this.productForm.patchValue(product);
-  }
-
-  onDelete(productId: string) {
-    this.productService.delete(productId).subscribe(() => {
-      this.loadProducts();
+    this.productService.getProducts().subscribe((res: Product[] | any) => {
+      this.products = res.products || [];
+      console.log('product', this.products);
     });
   }
 
-  resetForm() {
+  onFileChange(event: any): void {
+    if (event.target.files && event.target.files.length > 0) {
+      this.selectedFiles = Array.from(event.target.files);
+    }
+  }
+
+  onSubmit(): void {
+    const formData = new FormData();
+    const formValue = this.productForm.value;
+
+    Object.keys(formValue).forEach((key) => {
+      if (key !== 'images') {
+        formData.append(key, formValue[key]);
+      }
+    });
+
+    this.selectedFiles.forEach((file) => {
+      formData.append('images', file);
+    });
+
+    if (this.selectedProductId) {
+      this.productService
+        .updateProduct(this.selectedProductId, formData)
+        .subscribe(() => {
+          this.resetForm();
+        });
+    } else {
+      this.productService.createProduct(formData).subscribe(() => {
+        this.resetForm();
+      });
+    }
+  }
+
+  onEdit(product: any): void {
+    this.selectedProductId = product.productId;
+    this.productForm.patchValue({
+      title: product.title,
+      description: product.description,
+      price: product.price,
+      oldPrice: product.oldPrice,
+      rating: product.rating,
+      reviews: product.reviews,
+      category: product.category,
+      color: product.color,
+      size: product.size,
+      bestseller: product.bestseller,
+    });
+  }
+
+  onDelete(productId: string): void {
+    this.productService.deleteProduct(productId).subscribe({
+      next: () => {
+        this.productService.getProducts(); // Refresh the product list after deletion
+      },
+      error: (err) => {
+        console.error('Failed to delete product:', err);
+      },
+    });
+  }
+
+  resetForm(): void {
     this.productForm.reset();
-    this.selectedProductId = undefined;
-    this.imageFile = undefined;
+    this.selectedFiles = [];
+    this.selectedProductId = null;
+    this.loadProducts();
   }
 }

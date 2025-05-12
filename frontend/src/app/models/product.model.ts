@@ -1,18 +1,15 @@
 export interface Product {
-  _id?: string;
+  productId: string;
   title: string;
   description: string;
   price: number;
-  oldPrice?: number;
-  rating?: number;
-  reviews?: number;
+  oldPrice: number;
+  rating: number;
+  reviews: number;
   category: string;
+  color: string;
   size: string;
-  bestseller?: boolean;
-  image?: string;
-  productId?: string;
-  id: string;
-  hoverImage?: string;  // optional if it’s not always present
-  badge?: string;       // optional, e.g., "New", "Sale"
-  color?: string;
+  bestseller: boolean;
+  images: string[]; // updated for image array
+  badge?: string;   // if applicable
 }

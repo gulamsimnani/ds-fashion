@@ -25,16 +25,18 @@ export class ProductListComponent implements OnInit {
   }
 
   loadProducts() {
-    this.productService.getAll().subscribe((res: Product[] | any) => {
-    this.products = res.products || [];
-    console.log("product", this.products)
-  });
+    this.productService.getProducts().subscribe((res: Product[] | any) => {
+      this.products = res.products || [];
+      console.log('product', this.products);
+    });
   }
 
   get filteredProducts(): Product[] {
     return this.selectedCategory === 'all'
       ? this.products
-      : this.products.filter(product => product.category === this.selectedCategory);
+      : this.products.filter(
+          (product) => product.category === this.selectedCategory
+        );
   }
 
   setCategory(category: string) {

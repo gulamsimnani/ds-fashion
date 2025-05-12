@@ -20,7 +20,7 @@ export class ProductCardComponent {
     const product = {
       productId: this.product.productId,
       title: this.product.title,
-      image: this.getImageUrl(this.product.image),
+      image: this.getImageUrl(this.product.images[0]),
       price: this.product.price,
       quantity: 1,
       color: this.product.color,
@@ -33,9 +33,9 @@ export class ProductCardComponent {
 
   handleAddToCart() {
     const item = {
-      productId: this.product._id,
+      productId: this.product.productId,
       title: this.product.title,
-      image: this.getImageUrl(this.product.image),
+      image: this.getImageUrl(this.product.images[0]),
       price: this.product.price,
       quantity: 1,
       color: this.product.color,
