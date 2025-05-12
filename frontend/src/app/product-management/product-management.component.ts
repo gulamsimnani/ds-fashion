@@ -31,16 +31,21 @@ export class ProductManagementComponent implements OnInit {
     this.productForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
-      price: [0, Validators.required],
-      oldPrice: [0],
-      rating: [0],
-      reviews: [0],
+      price: [null, Validators.required],
+      oldPrice: [null],
+      rating: [null],
+      reviews: [null],
       category: [''],
-      color: ['', Validators.required],
+      color: [''],
       size: [''],
-      bestseller: [false, Validators.required],
-      images: [null],
+      bestseller: [false],
+      featured: [false],
+      newArrival: [false],
+      onSale: [false],
+      soldOut: [false],
+      inStock: [true], // default true
     });
+
     this.loadProducts();
   }
 
@@ -85,20 +90,27 @@ export class ProductManagementComponent implements OnInit {
   }
 
   onEdit(product: any): void {
-    this.selectedProductId = product.productId;
-    this.productForm.patchValue({
-      title: product.title,
-      description: product.description,
-      price: product.price,
-      oldPrice: product.oldPrice,
-      rating: product.rating,
-      reviews: product.reviews,
-      category: product.category,
-      color: product.color,
-      size: product.size,
-      bestseller: product.bestseller,
-    });
-  }
+  this.selectedProductId = product.productId;
+
+  this.productForm.patchValue({
+    title: product.title,
+    description: product.description,
+    price: product.price,
+    oldPrice: product.oldPrice,
+    rating: product.rating,
+    reviews: product.reviews,
+    category: product.category,
+    color: product.color,
+    size: product.size,
+    bestseller: product.bestseller || false,
+    featured: product.featured || false,
+    newArrival: product.newArrival || false,
+    onSale: product.onSale || false,
+    soldOut: product.soldOut || false,
+    inStock: product.inStock !== undefined ? product.inStock : true
+  });
+}
+
 
   onDelete(productId: string): void {
     this.productService.deleteProduct(productId).subscribe({

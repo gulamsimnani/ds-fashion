@@ -1,43 +1,148 @@
 <div class="container py-4">
   <div class="row">
     <div class="col-md-6 mx-auto">
-      <form [formGroup]="productForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+      <form
+        [formGroup]="productForm"
+        (ngSubmit)="onSubmit()"
+        enctype="multipart/form-data"
+      >
         <div class="form-group mb-2">
-          <input formControlName="title" class="form-control" placeholder="Title" required />
+          <input
+            formControlName="title"
+            class="form-control"
+            placeholder="Title"
+            required
+          />
         </div>
         <div class="form-group mb-2">
-          <input formControlName="description" class="form-control" placeholder="Description" />
+          <input
+            formControlName="description"
+            class="form-control"
+            placeholder="Description"
+          />
         </div>
         <div class="form-group mb-2">
-          <input type="number" formControlName="price" class="form-control" placeholder="Price" />
+          <input
+            type="number"
+            formControlName="price"
+            class="form-control"
+            placeholder="Price"
+          />
         </div>
         <div class="form-group mb-2">
-          <input type="number" formControlName="oldPrice" class="form-control" placeholder="Old Price" />
+          <input
+            type="number"
+            formControlName="oldPrice"
+            class="form-control"
+            placeholder="Old Price"
+          />
         </div>
         <div class="form-group mb-2">
-          <input type="number" formControlName="rating" class="form-control" placeholder="Rating" />
+          <input
+            type="number"
+            formControlName="rating"
+            class="form-control"
+            placeholder="Rating"
+          />
         </div>
         <div class="form-group mb-2">
-          <input type="number" formControlName="reviews" class="form-control" placeholder="Reviews" />
+          <input
+            type="number"
+            formControlName="reviews"
+            class="form-control"
+            placeholder="Reviews"
+          />
         </div>
         <div class="form-group mb-2">
-          <input formControlName="category" class="form-control" placeholder="Category" />
+          <input
+            formControlName="category"
+            class="form-control"
+            placeholder="Category"
+          />
         </div>
         <div class="form-group mb-2">
-          <input formControlName="color" class="form-control" placeholder="Color" />
+          <input
+            formControlName="color"
+            class="form-control"
+            placeholder="Color"
+          />
         </div>
         <div class="form-group mb-2">
-          <input formControlName="size" class="form-control" placeholder="Size" />
+          <input
+            formControlName="size"
+            class="form-control"
+            placeholder="Size"
+          />
         </div>
         <div class="form-check mb-2">
-          <input type="checkbox" class="form-check-input" formControlName="bestseller" id="bestseller" />
+          <input
+            type="checkbox"
+            class="form-check-input"
+            formControlName="bestseller"
+            id="bestseller"
+          />
           <label class="form-check-label" for="bestseller">Bestseller</label>
         </div>
+        <div class="form-check mb-2">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            formControlName="featured"
+            id="featured"
+          />
+          <label class="form-check-label" for="featured">Featured</label>
+        </div>
+
+        <div class="form-check mb-2">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            formControlName="newArrival"
+            id="newArrival"
+          />
+          <label class="form-check-label" for="newArrival">New Arrival</label>
+        </div>
+
+        <div class="form-check mb-2">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            formControlName="onSale"
+            id="onSale"
+          />
+          <label class="form-check-label" for="onSale">On Sale</label>
+        </div>
+
+        <div class="form-check mb-2">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            formControlName="soldOut"
+            id="soldOut"
+          />
+          <label class="form-check-label" for="soldOut">Sold Out</label>
+        </div>
+
+        <div class="form-check mb-3">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            formControlName="inStock"
+            id="inStock"
+          />
+          <label class="form-check-label" for="inStock">In Stock</label>
+        </div>
+
         <div class="form-group mb-3">
-          <input type="file" class="form-control" (change)="onFileChange($event)" multiple />
+          <input
+            type="file"
+            class="form-control"
+            (change)="onFileChange($event)"
+            multiple
+          />
         </div>
         <button type="submit" class="btn btn-primary w-100">
-          {{ selectedProductId ? 'Update Product' : 'Create Product' }}
+          {{ selectedProductId ? "Update Product" : "Create Product" }}
         </button>
       </form>
     </div>
@@ -55,6 +160,11 @@
               <th>Title</th>
               <th>Price</th>
               <th>Bestseller</th>
+              <th>Featured</th>
+              <th>New</th>
+              <th>On Sale</th>
+              <th>In Stock</th>
+
               <th>Category</th>
               <th>Actions</th>
             </tr>
@@ -63,11 +173,26 @@
             <tr *ngFor="let product of products">
               <td>{{ product.title }}</td>
               <td>₹{{ product.price }}</td>
-              <td>{{ product.bestseller ? 'Yes' : 'No' }}</td>
+              <td>{{ product.bestseller ? "Yes" : "No" }}</td>
+              <td>{{ product.featured ? "Yes" : "No" }}</td>
+              <td>{{ product.newArrival ? "Yes" : "No" }}</td>
+              <td>{{ product.onSale ? "Yes" : "No" }}</td>
+              <td>{{ product.inStock ? "Yes" : "No" }}</td>
+
               <td>{{ product.category }}</td>
               <td>
-                <button class="btn btn-sm btn-outline-primary me-2" (click)="onEdit(product)">Edit</button>
-                <button class="btn btn-sm btn-outline-danger" (click)="onDelete(product.productId!)">Delete</button>
+                <button
+                  class="btn btn-sm btn-outline-primary me-2"
+                  (click)="onEdit(product)"
+                >
+                  Edit
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-danger"
+                  (click)="onDelete(product.productId!)"
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           </tbody>
